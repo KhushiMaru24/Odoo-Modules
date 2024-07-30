@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Form view for the cryptocurrency data -->
+    <record id="view_crypto_form" model="ir.ui.view">
+        <field name="name">crypto.data.form</field>
+        <field name="model">crypto.data</field>
+        <field name="arch" type="xml">
+            <form string="Crypto Data">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="symbol"/>
+                        <field name="price_usd"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view for the cryptocurrency data -->
+    <record id="view_crypto_tree" model="ir.ui.view">
+        <field name="name">crypto.data.tree</field>
+        <field name="model">crypto.data</field>
+        <field name="arch" type="xml">
+            <tree string="Crypto Data">
+                <field name="name"/>
+                <field name="symbol"/>
+                <field name="price_usd"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Menu item to access the cryptocurrency data -->
+    <menuitem id="crypto_data_menu" name="Crypto Data" sequence="0"/>
+
+    <!-- Action to display the cryptocurrency data in a tree view -->
+    <record id="action_crypto_data" model="ir.actions.act_window">
+        <field name="name">Crypto Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crypto.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form</field><field name="view_ids" eval="[(5, 0, 0),
+                                       (0, 0, {'view_mode': 'tree', 'view_id': ref('view_crypto_tree')}),
+                                       (0, 0, {'view_mode': 'form', 'view_id': ref('view_crypto_form')})]"/>
+<!--        <field name="search_view_id" ref="view_crypto_search"/>-->
+    </record>
+
+    <!-- Adding the action to the menu -->
+    <menuitem id="crypto_data_action_menu" name="Crypto Data" parent="crypto_data_menu" action="action_crypto_data" sequence="10"/>
+</odoo>
